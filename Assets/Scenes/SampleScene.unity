@@ -413,6 +413,37 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &337094919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 337094920}
+  m_Layer: 0
+  m_Name: firePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &337094920
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337094919}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.503, y: -0.06, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1108101814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &415592223
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +759,7 @@ GameObject:
   - component: {fileID: 950921513}
   - component: {fileID: 950921515}
   - component: {fileID: 950921514}
+  - component: {fileID: 950921516}
   m_Layer: 0
   m_Name: WalkInFront
   m_TagString: Untagged
@@ -1727,6 +1759,44 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &950921516
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950921512}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
 --- !u!1 &1108101812
 GameObject:
   m_ObjectHideFlags: 0
@@ -1740,8 +1810,10 @@ GameObject:
   - component: {fileID: 1108101817}
   - component: {fileID: 1108101816}
   - component: {fileID: 1108101815}
-  - component: {fileID: 1108101818}
   - component: {fileID: 1108101819}
+  - component: {fileID: 1108101820}
+  - component: {fileID: 1108101821}
+  - component: {fileID: 1108101822}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1817,7 +1889,8 @@ Transform:
   m_LocalPosition: {x: -2.89, y: -0.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 337094920}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1108101815
@@ -1923,6 +1996,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 310b10b2-710c-4460-9978-3beb742ebcc5
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a4ae84fe-c338-4309-afc8-03be0e82326e
+    m_ActionName: 'Player/useFireElement[/Keyboard/r]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4a69028d-3d35-4df8-8ce8-5a4965db6b7d
+    m_ActionName: 'Player/waterElement[/Keyboard/f]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c1be208d-f224-4d42-b26a-f2acdb70bfd7
+    m_ActionName: 'Player/shoot[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1951,32 +2036,10 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
---- !u!95 &1108101818
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108101812}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f3c25bfc7a54d8b4bab8a0905b891613, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &1108101819
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2023,6 +2086,64 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.8206849, y: 0.7575051}
   m_EdgeRadius: 0
+--- !u!114 &1108101820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108101812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898473207902e0f41812bc1f6f8ea0be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireElementAction: {fileID: 5054905210784506136, guid: 414afb0d860ee4e49b2908f93ad84879,
+    type: 3}
+  waterElementAction: {fileID: -8339302940087259254, guid: 414afb0d860ee4e49b2908f93ad84879,
+    type: 3}
+  normalController: {fileID: 9100000, guid: f3c25bfc7a54d8b4bab8a0905b891613, type: 2}
+  fireOverrideController: {fileID: 22100000, guid: 9612add5d61f37f439c88de14815e63b,
+    type: 2}
+  waterOverrideController: {fileID: 22100000, guid: 0c5ed97502f73d74bae6e7a35968a6f4,
+    type: 2}
+--- !u!95 &1108101821
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108101812}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f3c25bfc7a54d8b4bab8a0905b891613, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1108101822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108101812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d947ba97f8a2344a3dce942c404ee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 337094920}
+  bulletPrefab: {fileID: 4141581955902610767, guid: c6896ea0f1c10a44092dd536da7de0f2,
+    type: 3}
 --- !u!1 &1141667378
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,9 +16,15 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>(); // Dodajemy referencj�
     }
 
+
+    private void FixedUpdate()
+    {
+        Vector2 newPosition = rb.position + moveInput * moveSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(newPosition);
+    }
+
     void Update()
     {
-        rb.linearVelocity = moveInput * moveSpeed;
         Flip(); // Obracamy sprite'a w Update
     }
 
