@@ -11,8 +11,8 @@ public class PlayerPowers : MonoBehaviour
     [SerializeField] private AnimatorOverrideController fireOverrideController;
     [SerializeField] private AnimatorOverrideController waterOverrideController;
 
-    private bool isFireActive = false;
-    private bool isWaterActive = false;
+    public bool isFireActive = false;
+    public bool isWaterActive = false;
     private Animator animator;
 
     private void Start()
@@ -35,13 +35,15 @@ public class PlayerPowers : MonoBehaviour
     private void OnWaterElementPressed(InputAction.CallbackContext context)
     {
         isWaterActive = !isWaterActive;
-        animator.runtimeAnimatorController = isWaterActive ? waterOverrideController : normalController;
+        isFireActive = false;
+        animator.runtimeAnimatorController = isWaterActive && !isFireActive ? waterOverrideController : normalController;
     }
 
     private void OnFireElementPressed(InputAction.CallbackContext context)
     {
         isFireActive = !isFireActive;
-        animator.runtimeAnimatorController = isFireActive ? fireOverrideController : normalController;
+        isWaterActive = false;
+        animator.runtimeAnimatorController = isFireActive && !isWaterActive ? fireOverrideController : normalController;
     }
 
     private void OnDisable()
