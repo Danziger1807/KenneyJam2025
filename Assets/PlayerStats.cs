@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -57,19 +58,26 @@ public class PlayerStats : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
-        Debug.Log("Gracz umar³");
-
         if (gameOverText != null)
         {
             gameOverText.enabled = true;
             gameOverText.text = "GAME OVER";
         }
 
-        Invoke("RestartScene", restartDelay);
+        Time.timeScale = 0f;
+        StartCoroutine(RestartAfterDelayRealtime());
     }
 
-    private void RestartScene()
+    private IEnumerator RestartAfterDelayRealtime()
     {
+        float timer = 0f;
+        while (timer < restartDelay)
+        {
+            timer += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

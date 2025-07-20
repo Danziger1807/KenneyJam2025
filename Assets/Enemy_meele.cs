@@ -21,6 +21,10 @@ public class Enemy_meele : MonoBehaviour
     public float obstacleCheckDistance = 1f;
     public int damage = 1;
 
+    private PlayerStats playerInContact = null;
+    private float damageCooldown = 1f;
+    private float damageTimer = 0f;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -57,6 +61,16 @@ public class Enemy_meele : MonoBehaviour
             else
             {
                 Patrol();
+            }
+        }
+
+        if (playerInContact != null)
+        {
+            damageTimer += Time.deltaTime;
+            if (damageTimer >= damageCooldown)
+            {
+                playerInContact.TakeDamage(damage);
+                damageTimer = 0f;
             }
         }
     }
@@ -121,13 +135,17 @@ public class Enemy_meele : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerStats player = collision.gameObject.GetComponent<PlayerStats>();
-            if (player != null)
-            {
-                player.TakeDamage(damage);
-            }
+            playerInContact = collision.gameObject.GetComponent<PlayerStats>();
+            damageTimer = damageCooldown;
         }
     }
 
-
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerInContact = null;
+            damageTimer = 0f;
+        }
+    }
 }
