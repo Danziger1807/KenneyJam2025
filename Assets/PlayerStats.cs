@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -8,14 +10,24 @@ public class PlayerStats : MonoBehaviour
     public int maxMana = 3;
     public int currentMana;
 
+    public Text gameOverText;
+    public float restartDelay = 3f;
+
+    private bool isDead = false;
+
     private void Start()
     {
         currentHealth = maxHealth;
         currentMana = maxMana;
+
+        if (gameOverText != null)
+            gameOverText.enabled = false;
     }
 
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
+
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
 
@@ -42,7 +54,22 @@ public class PlayerStats : MonoBehaviour
 
     private void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
         Debug.Log("Gracz umar³");
-        // np. restart sceny: SceneManager.LoadScene(...)
+
+        if (gameOverText != null)
+        {
+            gameOverText.enabled = true;
+            gameOverText.text = "GAME OVER";
+        }
+
+        Invoke("RestartScene", restartDelay);
+    }
+
+    private void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
