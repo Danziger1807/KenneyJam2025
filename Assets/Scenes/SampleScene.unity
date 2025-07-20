@@ -4111,6 +4111,10 @@ MonoBehaviour:
   playerStats: {fileID: 1108101823}
   hearts:
   - {fileID: 1490639538}
+  - {fileID: 417760817}
+  - {fileID: 463342940}
+  - {fileID: 1899409105}
+  - {fileID: 681663353}
   fullHeart: {fileID: -4694811335637689597, guid: d393d84176892ee46a2f942200d49aa8,
     type: 3}
   emptyHeart: {fileID: -8763200446211160058, guid: d393d84176892ee46a2f942200d49aa8,
@@ -4133,7 +4137,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 1
+  m_Spacing: 13
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -4654,12 +4658,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71ab18e8f1aa2ae4e82dffe60fd135ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
-  currentHealth: 3
+  maxHealth: 5
+  currentHealth: 5
   maxMana: 3
   currentMana: 0
   gameOverText: {fileID: 0}
-  restartDelay: 3
+  restartDelay: 5
 --- !u!1 &1141667378
 GameObject:
   m_ObjectHideFlags: 0

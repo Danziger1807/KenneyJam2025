@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
     public int currentMana;
 
     public Text gameOverText;
-    public float restartDelay = 3f;
+    public float restartDelay = 5f;
 
     private bool isDead = false;
 
