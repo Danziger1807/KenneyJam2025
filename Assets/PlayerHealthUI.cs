@@ -10,17 +10,11 @@ public class PlayerHealthUI : MonoBehaviour
 
     void Update()
     {
+        if (playerStats == null) return;
+
         for (int i = 0; i < hearts.Length; i++)
         {
-            if (i < playerStats.currentHealth)
-            {
-                hearts[i].sprite = fullHeart;
-            }
-            else
-            {
-                hearts[i].sprite = emptyHeart;
-            }
-
+            hearts[i].sprite = i < playerStats.currentHealth ? fullHeart : emptyHeart;
             hearts[i].enabled = i < playerStats.maxHealth;
         }
     }
