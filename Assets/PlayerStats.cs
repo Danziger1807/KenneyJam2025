@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
     public int maxHealth = 5;
     public int currentHealth;
 
-    public int maxMana = 3;
+    public int maxMana = 50;
     public int currentMana;
 
     public Text gameOverText;
@@ -43,15 +43,6 @@ public class PlayerStats : MonoBehaviour
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
     }
 
-    public void UseMana(int amount)
-    {
-        currentMana = Mathf.Max(currentMana - amount, 0);
-    }
-
-    public void RestoreMana(int amount)
-    {
-        currentMana = Mathf.Min(currentMana + amount, maxMana);
-    }
 
     private void Die()
     {
@@ -80,4 +71,19 @@ public class PlayerStats : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void UseMana(int amount)
+    {
+        currentMana -= amount;
+        currentMana = Mathf.Max(currentMana, 0);
+    }
+
+
+
+    public void RestoreMana(int amount)
+    {
+        currentMana += amount;
+        currentMana = Mathf.Min(currentMana, maxMana);
+    }
+
 }
