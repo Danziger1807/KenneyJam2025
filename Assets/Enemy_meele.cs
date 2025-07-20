@@ -13,10 +13,13 @@ public class Enemy_meele : MonoBehaviour
     public float detectionRange = 5f;
     private bool playerInRange = false;
 
-    // PATROL
     private Vector2 patrolDirection;
     private float patrolTimer = 0f;
     public float patrolChangeInterval = 2f;
+
+    public LayerMask obstacleMask;
+    public float obstacleCheckDistance = 1f;
+    public int damage = 1;
 
     private void Awake()
     {
@@ -66,7 +69,7 @@ public class Enemy_meele : MonoBehaviour
     private void Patrol()
     {
         patrolTimer += Time.deltaTime;
-        if (patrolTimer >= patrolChangeInterval)
+        if (patrolTimer >= patrolChangeInterval || IsObstacleAhead())
         {
             patrolDirection = GetRandomDirection();
             patrolTimer = 0f;
@@ -74,7 +77,6 @@ public class Enemy_meele : MonoBehaviour
 
         moveDirection = patrolDirection;
 
-        
         if (patrolDirection != Vector2.zero)
         {
             float angle = Mathf.Atan2(patrolDirection.y, patrolDirection.x) * Mathf.Rad2Deg;
@@ -82,13 +84,28 @@ public class Enemy_meele : MonoBehaviour
         }
     }
 
+    private bool IsObstacleAhead()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, patrolDirection, obstacleCheckDistance, obstacleMask);
+        return hit.collider != null;
+    }
+
     private Vector2 GetRandomDirection()
     {
-       
-        float x = Random.Range(-1f, 1f);
-        float y = Random.Range(-1f, 1f);
-        Vector2 dir = new Vector2(x, y).normalized;
-        return dir;
+        for (int i = 0; i < 10; i++)
+        {
+            float x = Random.Range(-1f, 1f);
+            float y = Random.Range(-1f, 1f);
+            Vector2 dir = new Vector2(x, y).normalized;
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, obstacleCheckDistance, obstacleMask);
+            if (hit.collider == null)
+            {
+                return dir;
+            }
+        }
+
+        return Vector2.zero;
     }
 
     public void TakeDamage(float damage)
@@ -99,4 +116,18 @@ public class Enemy_meele : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerStats player = collision.gameObject.GetComponent<PlayerStats>();
+            if (player != null)
+            {
+                player.TakeDamage(damage);
+            }
+        }
+    }
+
+
 }
