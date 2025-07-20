@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1125376300476286355}
   - component: {fileID: -8100736888956268832}
   m_Layer: 0
-  m_Name: bullet
+  m_Name: normal bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4141581955902610767}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.70314646, w: 0.7110451}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7031465, w: 0.71104497}
   m_LocalPosition: {x: -11.09, y: -0.87, z: 0}
   m_LocalScale: {x: 0.77998835, y: 0.77998835, z: 0.77998835}
   m_ConstrainProportionsScale: 0
@@ -106,7 +106,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -148,7 +148,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -168,4 +168,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  damage: 20
   rb: {fileID: 4457350313385031532}
